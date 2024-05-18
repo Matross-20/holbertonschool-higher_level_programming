@@ -4,20 +4,22 @@ def roman_to_int(roman_string):
     if not isinstance(roman_string, str) or not roman_string:
         return 0
 
-    roman_values = {
-        'I': 1, 'V': 5, 'X': 10, 'L': 50,
-        'C': 100, 'D': 500, 'M': 1000
-    }
+    roman_dict = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+            }
 
-    total = 0
-    i = 0
+    result = 0
+    prev_value = 0
 
-    while i < len(roman_string):
-        if i + 1 < len(roman_string) and roman_values[roman_string[i]] < roman_values[roman_string[i + 1]]:
-            total -= roman_values[roman_string[i]]
-        else:
-            total += roman_values[roman_string[i]]
-        i += 1
+    for letter in reversed(roman_string):
+        value = roman_dict.get(letter, 0)
+        result += value if value >= prev_value else -value
+        prev_value = value
 
-    return total
-
+    return result
