@@ -11,7 +11,7 @@ def add_integer(a, b=98):
 
     Returns:
         sum of two numbers
-    
+
     """
 
     if type(a) is not int and type(a) is not float:
