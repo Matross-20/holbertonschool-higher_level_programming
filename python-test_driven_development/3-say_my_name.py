@@ -1,4 +1,6 @@
- #!/usr/bin/python3
+#!/usr/bin/python3
+
+
 def say_my_name(first_name, last_name=""):
     # Check if first_name is a string
     if not isinstance(first_name, str):
