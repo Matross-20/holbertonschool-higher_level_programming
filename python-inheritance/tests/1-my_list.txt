@@ -1,4 +1,11 @@
+=======================
+How to Use 1-my_list.py
+=======================
 
+This module defines a class ``MyList`` that inherits from ``list``.
+
+Instantiation
+=============
 
 ``MyList`` can be instantiated with no arguments, which will return
 an empty list:
