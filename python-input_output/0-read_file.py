@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Module to read a file from argument"""
 
 def read_file(filename=""):
     """
