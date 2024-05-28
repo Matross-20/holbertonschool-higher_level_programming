@@ -1,4 +1,4 @@
-Python - Input/Output
+# Python - Input/Output
 
 * Why Python programming is awesome
 * How to open a file
