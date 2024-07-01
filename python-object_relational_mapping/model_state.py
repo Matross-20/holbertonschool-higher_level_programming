@@ -1,20 +1,11 @@
 #!/usr/bin/python3
+"""Start link class to table in database 
 """
-Contains the class definition of a City
-and an instance Base = declarative_base()
-"""
+import sys
+from model_state import Base, State
 
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
-from model_state import Base
+from sqlalchemy import (create_engine)
 
-
-class City(Base):
-    """
-    Represents a city in the database.
-    """
-    __tablename__ = 'cities'
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = Column(String(128), nullable=False)
-    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
-    state = relationship("State")
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    Base.metadata.create_all(engine)
