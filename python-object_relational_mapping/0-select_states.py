@@ -1,22 +1,43 @@
 #!/usr/bin/python3
-"""script for use in getting all states from sql db
 """
+Script to list all states from the database hbtn_0e_0_usa.
+"""
+
 import MySQLdb
 import sys
 
-if __name__ == '__main__':
-    args = sys.argv
-    if len(args) < 4:
-        print("Usage: {} username password database_name".format(args[0]))
-        exit(1)
-    username = args[1]
-    password = args[2]
-    data = args[3]
-    db = MySQLdb.connect(host='localhost', user=username,
-                         passwd=password, db=data,
-                         port=3306)
-    cur = db.cursor()
-    num_rows = cur.execute("SELECT * FROM states ORDER BY states.id")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
+
+def list_states(username, password, database):
+    """
+    Connects to the MySQL server and lists all states from
+    the specified database.
+
+    Args:
+        username (str): MySQL username.
+        password (str): MySQL password.
+        database (str): Database name.
+    """
+    try:
+        db = MySQLdb.connect(
+            host="localhost",
+            port=3306,
+            user=username,
+            passwd=password,
+            db=database
+        )
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM states ORDER BY id ASC")
+        states = cursor.fetchall()
+        for state in states:
+            print(state)
+        cursor.close()
+        db.close()
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) == 4:
+        list_states(sys.argv[1], sys.argv[2], sys.argv[3])
+    else:
+        print("Usage: ./0-select_states.py <username> <password> <database>")
