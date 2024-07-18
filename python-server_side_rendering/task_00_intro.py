@@ -7,7 +7,7 @@ def generative_initations(template, attendees):
         return
 
     # Check if attendees is a list of dictionaries
-    if notr isinstance(template, str):
+    if not isinstance(template, str):
         print("Error: Attendees is not a list of dictionaries.")
         return
 
