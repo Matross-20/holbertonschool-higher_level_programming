@@ -1,48 +1,64 @@
+#!/usr/bin/python3
 import os
+"""Program defines function that generates personalized invitation files
+"""
 
-def generative_initations(template, attendees):
-    # Check if template is a string
-    if not isinstance(template, str):
-        print("Error: Template is not a string.")
+def generate_invitations(template, attendees):
+    """Function generates invitations
+
+    Args:
+        template (str)
+        attendees (list)
+
+    Returns:
+        _type_: _description_
+    """
+
+    if not isinstance(template, str) or template is None: 
+        print("Template is supposed to be a string")
+        return
+    
+    if not isinstance(attendees, list) or attendees is None:
+        print("Attendees is supposed to be a list")
         return
 
-    # Check if attendees is a list of dictionaries
-    if not isinstance(template, str):
-        print("Error: Attendees is not a list of dictionaries.")
-        return
-
-    # Check if the template is empty
-    if template.strip() == "":
+    if not template:
         print("Template is empty, no output files generated.")
         return
-
-    # Check if the attendees list is empty
+    
     if not attendees:
         print("No data provided, no output files generated.")
         return
-    # Iterate over the list of attendees and generate the invitations
-    for index, attendees in enumerate(attendees):
-        name = attendee.get("name", "N/A")
-        event_title = attendee.get("event_title", "N/A")
-        event_date = attendees.get("event_date", "N/A")
-        event_location = attendees.get("event_location", "N/A")
+    
+    
+    try:
+        for x, attendee in enumerate(attendees, start=1):
+            attendee_name = attendee.get("name") or "N/A"
+            attendee_title = attendee.get("event_title") or "N/A"
+            attendee_date = attendee.get("event_date") or "N/A"
+            attendee_location = attendee.get("event_location") or "N/A"
 
-        # Write the invitation to a file named output_X.txt
-        output_file_name = f"output_{index + 1}.txt"
-        with open(output_file_name, "w") as output_file:
-            output_file.write(invitation)
 
-        print(f"Generated: {output_file_name}")
+            replace_name = "{name}"
+            replace_title = "{event_title}"
+            replace_date = "{event_date}"
+            replace_location = "{event_location}"
 
-    if__name__ == "__main__":
-        # Main file content
-        # Read the tmeplate from a file
-        with open('template.txt', 'r') as file:
-            template_content = file.read()
+            replace_text = template.replace(replace_name, attendee_name).replace(replace_title, attendee_title).replace(replace_date, attendee_date).replace(replace_location, attendee_location)
+            current_file = f"output_{x}.txt"
 
-        # List of attendees 
-        attendees = [
-                {"name": "Alice", "event_title": "Python Conference", "event_date": "2023-07-15", "event_location": "New York"}
-                {"name": "Bob", "event_title": "Data Science Workshop", "event_date": "2023-08-20", "event_location": "San Francisco"}
-                {"name": "Charlie", "event_title": "AI Summit", "event_date": None, "event_location": "Boston"}
-                ]
+            if os.path.exists(current_file):
+                print(f"{current_file} already exists")
+                continue
+            
+            with open(current_file, 'w') as output:
+                output.write(replace_text)
+
+    except Exception as e:
+        print(f"{e} found")
+        return
+
+
+        
+
+
