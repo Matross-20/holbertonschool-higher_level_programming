@@ -1,11 +1,10 @@
-from flask import Flask, render_template
-import json
+from flask import Flask, render_template, json
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-   return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
@@ -14,12 +13,13 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
- 
+
 @app.route('/items')
 def items():
-    with open("items.json", "r", encoding="utf-8") as file:
-        data = json.load(file)
-    items = data.get("items",[])
+    with open('items.json') as f:
+        data = json.load(f)
+    items = data.get("items", [])
+
     return render_template('items.html', items=items)
 
 if __name__ == '__main__':
