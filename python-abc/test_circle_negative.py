@@ -1,12 +1,10 @@
-import unittest
+import pytest
 from task_01_duck_typing import Circle
 
-class TestCircle(unittest.TestCase):
-    def test_circle_negative(self):
-        with self.assertRaises(ValueError) as context:
-            Circle(radius=-5)
-        self.assertEqual(str(context.exception), "Radius cannot be negative")
+def test_circle_negative():
+    with pytest.raises(ValueError, match="Radius cannot be negative"):
+        Circle(radius=-5)
 
 if __name__ == "__main__":
-    unittest.main()
+    test_circle_negative()
 
