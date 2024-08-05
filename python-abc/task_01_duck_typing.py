@@ -29,10 +29,10 @@ class Circle:
         self.radius = radius
         
     def perimeter(self):
-        return 2 * 3.141592653589793 * self.radius
+        return 2 * 3.141592653589793 * abs(self.radius)
 
     def area(self):
-        return 3.141592653589793 * (self.radius ** 2)
+        return 3.141592653589793 * (abs(self.radius) ** 2)
 
 class Rectangle(Shape):
     """Class representing a rectangle, inheriting from Shape."""
