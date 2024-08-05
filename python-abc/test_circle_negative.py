@@ -6,5 +6,5 @@ def test_circle_negative():
         Circle(radius=-5)
 
 if __name__ == "__main__":
-    test_circle_negative()
+    pytest.main()
 
