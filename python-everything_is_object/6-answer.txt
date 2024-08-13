@@ -1,3 +1,2 @@
 Best School
 s1 == s2
-
