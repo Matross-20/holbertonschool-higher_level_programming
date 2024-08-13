@@ -1,2 +1,1 @@
-with open("/mnt/data/type_function.txt", "w") as file:
-    file.write "type"
+type
