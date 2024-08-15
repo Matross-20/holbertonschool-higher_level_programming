@@ -22,17 +22,32 @@ class Shape(ABC):
         """
         pass
 
-class Circle:
+class Circle(Shape):
+    """Class representing a circle, inheriting from Shape."""
+
     def __init__(self, radius):
-        if radius < 0:
-            raise ValueError("Radius cannot be negative")
+        """Initialize a Circle with a given radius.
+
+        Args:
+            radius (float): The radius of the circle.
+        """
         self.radius = radius
-        
-    def perimeter(self):
-        return 2 * 3.141592653589793 * abs(self.radius)
 
     def area(self):
-        return 3.141592653589793 * (abs(self.radius) ** 2)
+        """Calculate the area of the circle.
+
+        Returns:
+            float: The area of the circle.
+        """
+        return math.pi * self.radius ** 2
+
+    def perimeter(self):
+        """Calculate the perimeter of the circle.
+
+        Returns:
+            float: The perimeter of the circle.
+        """
+        return 2 * math.pi * self.radius
 
 class Rectangle(Shape):
     """Class representing a rectangle, inheriting from Shape."""
@@ -82,3 +97,4 @@ if __name__ == "__main__":
 
     print("\nRectangle:")
     shape_info(rectangle)  # Should print the area and perimeter of the rectangle
+    
